@@ -1,0 +1,38 @@
+final products = [
+  {
+    'id': '0',
+    'title': 'Men\'s Nike Shoes',
+    'price': 44.52,
+    'imageUrl': 'images/shoes1.png',
+    'company': 'Nike',
+    'sizes': [9, 10, 11, 12],
+    'color': 'Colors.white',
+  },
+  {
+    'id': '1',
+    'title': 'Addidas Shoes',
+    'price': 20.12,
+    'imageUrl': 'images/shoes2.png',
+    'company': 'Addidas',
+    'sizes': [9, 10, 12],
+    'color': 'Color.fromRGBO(245, 247, 249, 1)',
+  },
+  {
+    'id': '2',
+    'title': 'Bata Women\'s Shoes',
+    'price': 28.95,
+    'imageUrl': 'images/shoes3.png',
+    'company': 'Bata',
+    'sizes': [8, 9, 10],
+    'color': 'Colors.white',
+  },
+  {
+    'id': '3',
+    'title': 'Jordan Shoes',
+    'price': 420.69,
+    'imageUrl': 'images/shoes4.png',
+    'company': 'Nike',
+    'sizes': [8, 9, 10],
+    'color': 'Color.fromRGBO(245, 247, 249, 1)',
+  },
+];
