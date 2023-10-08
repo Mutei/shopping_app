@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'home.dart';
-import 'constants.dart';
-import 'product_details_page.dart';
-import 'global_variable.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,11 +19,7 @@ class MyApp extends StatelessWidget {
             titleTextStyle: TextStyle(fontSize: 20, color: Colors.black),
           ),
           useMaterial3: true),
-      home: ProductDetailsPage(
-        titleProduct: products[0],
-        imageProduct: products[0],
-        priceProduct: products[0],
-      ),
+      home: const HomePage(),
     );
   }
 }

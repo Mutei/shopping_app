@@ -12,5 +12,5 @@ const kBoldedTextStyle = TextStyle(
   fontWeight: FontWeight.bold,
   fontSize: 35,
 );
-
 const kCartChildrenColor = Colors.black;
+const kBottomNaivgationBarColor = Colors.black;
