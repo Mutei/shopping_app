@@ -3,6 +3,7 @@ import 'package:shopping_app/constants.dart';
 import 'package:shopping_app/global_variable.dart';
 import 'constants.dart';
 import 'product_container.dart';
+import 'product_details_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -30,13 +31,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             Row(
               children: [
-                const Text(
-                  "Shoes\nCollection",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 35,
-                  ),
-                ),
+                const Text("Shoes\nCollection", style: kBoldedTextStyle),
                 const SizedBox(
                   width: 20,
                 ),
@@ -88,20 +83,23 @@ class _HomePageState extends State<HomePage> {
                   }),
             ),
             Expanded(
-              child: ListView.builder(
-                itemCount: products.length,
-                scrollDirection: Axis.vertical,
-                itemBuilder: (context, index) {
-                  final product = products[index];
-                  return ProductContainer(
-                    title: product['title'] as String,
-                    price: (product['price'] as num).toDouble(),
-                    image: product['imageUrl'] as String,
-                    colour: index.isEven
-                        ? Colors.white
-                        : const Color.fromRGBO(245, 247, 249, 1),
-                  );
-                },
+              child: GestureDetector(
+                onTap: () {},
+                child: ListView.builder(
+                  itemCount: products.length,
+                  scrollDirection: Axis.vertical,
+                  itemBuilder: (context, index) {
+                    final product = products[index];
+                    return ProductContainer(
+                      title: product['title'] as String,
+                      price: (product['price'] as num).toDouble(),
+                      image: product['imageUrl'] as String,
+                      colour: index.isEven
+                          ? Colors.white
+                          : const Color.fromRGBO(245, 247, 249, 1),
+                    );
+                  },
+                ),
               ),
             )
           ],

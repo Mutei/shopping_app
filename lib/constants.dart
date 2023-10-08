@@ -8,3 +8,9 @@ const kSearchBorder = OutlineInputBorder(
 );
 const kChipBackgroundColor = Color.fromRGBO(245, 247, 249, 1);
 const kSelectedChipBackGroundColor = Colors.yellow;
+const kBoldedTextStyle = TextStyle(
+  fontWeight: FontWeight.bold,
+  fontSize: 35,
+);
+
+const kCartChildrenColor = Colors.black;

@@ -6,7 +6,6 @@ final products = [
     'imageUrl': 'images/shoes1.png',
     'company': 'Nike',
     'sizes': [9, 10, 11, 12],
-    'color': 'Colors.white',
   },
   {
     'id': '1',
@@ -15,7 +14,6 @@ final products = [
     'imageUrl': 'images/shoes2.png',
     'company': 'Addidas',
     'sizes': [9, 10, 12],
-    'color': 'Color.fromRGBO(245, 247, 249, 1)',
   },
   {
     'id': '2',
@@ -24,7 +22,6 @@ final products = [
     'imageUrl': 'images/shoes3.png',
     'company': 'Bata',
     'sizes': [8, 9, 10],
-    'color': 'Colors.white',
   },
   {
     'id': '3',
@@ -33,6 +30,5 @@ final products = [
     'imageUrl': 'images/shoes4.png',
     'company': 'Nike',
     'sizes': [8, 9, 10],
-    'color': 'Color.fromRGBO(245, 247, 249, 1)',
   },
 ];
