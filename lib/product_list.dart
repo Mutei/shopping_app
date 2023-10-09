@@ -15,12 +15,41 @@ class ProductList extends StatefulWidget {
 class _ProductListState extends State<ProductList> {
   final List<String> filters = const ['All', 'Addidas', 'Nike', 'Bata'];
   late String selectedFilter;
+  String searchText = ''; // Store search input
+  List<Map<String, Object>> filteredProducts = []; // Filtered products list
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     selectedFilter = filters[0];
+    filteredProducts = products; // Initialize with all products
+  }
+
+  // Function to filter products based on search text
+  void filterProducts(String text) {
+    setState(() {
+      searchText = text;
+      filteredProducts = products
+          .where((product) => product['title']
+              .toString()
+              .toLowerCase()
+              .contains(text.toLowerCase()))
+          .toList();
+    });
+  }
+
+  void choiceProducts(String filter) {
+    setState(() {
+      selectedFilter = filter;
+      if (filter == 'All') {
+        filteredProducts = products; // Show all products
+      } else {
+        filteredProducts = products
+            .where(
+                (product) => product['company'] == filter) // Filter by company
+            .toList();
+      }
+    });
   }
 
   @override
@@ -43,7 +72,8 @@ class _ProductListState extends State<ProductList> {
                       border: kSearchBorder,
                       enabledBorder: kSearchBorder,
                     ),
-                    onChanged: (text) {},
+                    onChanged:
+                        filterProducts, // Call filterProducts when text changes
                   ),
                 ),
               ],
@@ -59,9 +89,7 @@ class _ProductListState extends State<ProductList> {
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: GestureDetector(
                         onTap: () {
-                          setState(() {
-                            selectedFilter = filter;
-                          });
+                          choiceProducts(filter);
                         },
                         child: Chip(
                           padding: const EdgeInsets.all(15),
@@ -84,14 +112,15 @@ class _ProductListState extends State<ProductList> {
             ),
             Expanded(
               child: ListView.builder(
-                itemCount: products.length,
+                itemCount: filteredProducts.length, // Use filtered products
                 scrollDirection: Axis.vertical,
                 itemBuilder: (context, index) {
-                  final product = products[index];
+                  final product = filteredProducts[index];
                   return GestureDetector(
                     onTap: () {
                       Navigator.of(context)
                           .push(MaterialPageRoute(builder: (context) {
+                        // Cast the 'product' Map to Map<String, Object> here
                         return ProductDetailsPage(product: product);
                       }));
                     },
