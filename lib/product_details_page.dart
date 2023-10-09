@@ -10,7 +10,7 @@ class ProductDetailsPage extends StatefulWidget {
 
   final Map<String, Object> product;
   final List<String> filters = const ['10', '11', '12'];
-  List<Map<String, Object>> cartItems = []; // Declare cartItems here
+  final List<Map<String, Object>> cartItems = []; // Declare cartItems here
 
   @override
   State<ProductDetailsPage> createState() => _ProductDetailsPageState();
@@ -53,11 +53,11 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
               child: Row(
                 children: [
                   buildChip(0, '10'), // Build the first chip
-                  SizedBox(
+                  const SizedBox(
                     width: 20,
                   ),
                   buildChip(1, '11'), // Build the second chip
-                  SizedBox(
+                  const SizedBox(
                     width: 20,
                   ),
                   buildChip(2, '12'), // Build the third chip
@@ -67,9 +67,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
             const SizedBox(height: 50),
             ElevatedButton(
               onPressed: () {
-                // Add the selected product to the cartItems list
                 widget.cartItems.add(widget.product);
-                // Now navigate to the CartPage and pass the updated cartItems list
                 Navigator.push(
                   context,
                   MaterialPageRoute(

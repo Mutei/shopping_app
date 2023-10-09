@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'product_list.dart';
-import 'cart_page.dart'; // Import your CartPage here
+import 'cart_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -12,7 +12,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   late int currentPage;
   late PageController _pageController;
-  List<Map<String, Object>> cartItems = []; // Add a PageController
+  List<Map<String, Object>> cartItems = []; // Move cartItems to HomePage state
 
   @override
   void initState() {
@@ -23,15 +23,21 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void dispose() {
-    _pageController.dispose(); // Dispose of the PageController
+    _pageController.dispose();
     super.dispose();
+  }
+
+  // Function to add items to the cart
+  void addToCart(Map<String, Object> product) {
+    setState(() {
+      cartItems.add(product);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageView(
-        // Use PageView for navigating between pages
         controller: _pageController,
         onPageChanged: (index) {
           setState(() {
