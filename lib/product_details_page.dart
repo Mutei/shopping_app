@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'constants.dart';
 
-class ProductDetailsPage extends StatelessWidget {
+class ProductDetailsPage extends StatefulWidget {
   const ProductDetailsPage({
     Key? key,
     required this.product,
@@ -9,6 +9,12 @@ class ProductDetailsPage extends StatelessWidget {
 
   final Map<String, Object> product;
 
+  @override
+  State<ProductDetailsPage> createState() => _ProductDetailsPageState();
+  final List<String> filters = const ['10', '11', '12'];
+}
+
+class _ProductDetailsPageState extends State<ProductDetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,16 +25,16 @@ class ProductDetailsPage extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              product['title'] as String,
+              widget.product['title'] as String,
               style: kBoldedTextStyle,
             ),
             const SizedBox(height: 100), // Use SizedBox for spacing
             Image.asset(
-              product['imageUrl'] as String,
+              widget.product['imageUrl'] as String,
             ),
             const SizedBox(height: 50), // Use SizedBox for spacing
             Text(
-              '\$${product["price"].toString()}', // Format to 2 decimal places.
+              '\$${widget.product["price"].toString()}', // Format to 2 decimal places.
               style: kBoldedTextStyle,
             ),
             const SizedBox(height: 100), // Use SizedBox for spacing
