@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shopping_app/product_list.dart';
-import 'package:shopping_app/cart_page.dart'; // Import your CartPage here
+import 'product_list.dart';
+import 'cart_page.dart'; // Import your CartPage here
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -11,7 +11,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late int currentPage;
-  late PageController _pageController; // Add a PageController
+  late PageController _pageController;
+  List<Map<String, Object>> cartItems = []; // Add a PageController
 
   @override
   void initState() {
@@ -37,9 +38,11 @@ class _HomePageState extends State<HomePage> {
             currentPage = index;
           });
         },
-        children: const [
-          ProductList(), // Your product list page
-          CartPage(), // Your cart page
+        children: [
+          const ProductList(), // Your product list page
+          CartPage(
+            cartItems: cartItems,
+          ), // Your cart page
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -56,7 +59,9 @@ class _HomePageState extends State<HomePage> {
         currentIndex: currentPage,
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(
+              Icons.home,
+            ),
             label: '',
           ),
           BottomNavigationBarItem(

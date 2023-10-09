@@ -1,20 +1,30 @@
 import 'package:flutter/material.dart';
 import 'constants.dart';
+import 'cart_page.dart';
 
 class ProductDetailsPage extends StatefulWidget {
-  const ProductDetailsPage({
+  ProductDetailsPage({
     Key? key,
     required this.product,
   }) : super(key: key);
 
   final Map<String, Object> product;
+  final List<String> filters = const ['10', '11', '12'];
+  List<Map<String, Object>> cartItems = []; // Declare cartItems here
 
   @override
   State<ProductDetailsPage> createState() => _ProductDetailsPageState();
-  final List<String> filters = const ['10', '11', '12'];
 }
 
 class _ProductDetailsPageState extends State<ProductDetailsPage> {
+  int selectedChipIndex = 0; // Initialize the first chip as selected
+
+  @override
+  void initState() {
+    super.initState();
+    selectedChipIndex = 0; // Initialize the first chip as selected
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,49 +38,49 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
               widget.product['title'] as String,
               style: kBoldedTextStyle,
             ),
-            const SizedBox(height: 100), // Use SizedBox for spacing
+            const SizedBox(height: 100),
             Image.asset(
               widget.product['imageUrl'] as String,
             ),
-            const SizedBox(height: 50), // Use SizedBox for spacing
+            const SizedBox(height: 50),
             Text(
-              '\$${widget.product["price"].toString()}', // Format to 2 decimal places.
+              '\$${widget.product["price"].toString()}',
               style: kBoldedTextStyle,
             ),
-            const SizedBox(height: 100), // Use SizedBox for spacing
+            const SizedBox(height: 100),
             Container(
               padding: const EdgeInsets.only(left: 30),
-              child: const Row(
+              child: Row(
                 children: [
-                  Chip(
-                    backgroundColor: kChipBackgroundColor,
-                    label: Text("10"),
-                  ),
+                  buildChip(0, '10'), // Build the first chip
                   SizedBox(
                     width: 20,
                   ),
-                  Chip(
-                    backgroundColor: kChipBackgroundColor,
-                    label: Text("11"),
-                  ),
+                  buildChip(1, '11'), // Build the second chip
                   SizedBox(
                     width: 20,
                   ),
-                  Chip(
-                    backgroundColor: kChipBackgroundColor,
-                    label: Text("12"),
-                  ),
+                  buildChip(2, '12'), // Build the third chip
                 ],
               ),
             ),
-            const SizedBox(height: 50), // Use SizedBox for spacing
+            const SizedBox(height: 50),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                // Add the selected product to the cartItems list
+                widget.cartItems.add(widget.product);
+                // Now navigate to the CartPage and pass the updated cartItems list
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CartPage(cartItems: widget.cartItems),
+                  ),
+                );
+              },
               style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(
-                    kSeedColor), // Change to your desired color.
-                minimumSize: MaterialStateProperty.all<Size>(
-                    const Size(350, 48)), // Change to your desired size.
+                backgroundColor: MaterialStateProperty.all<Color>(kSeedColor),
+                minimumSize:
+                    MaterialStateProperty.all<Size>(const Size(350, 48)),
               ),
               child: const Row(
                 children: [
@@ -98,6 +108,21 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget buildChip(int index, String label) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          selectedChipIndex = index; // Update the selected chip
+        });
+      },
+      child: Chip(
+        backgroundColor:
+            selectedChipIndex == index ? Colors.yellow : kChipBackgroundColor,
+        label: Text(label),
       ),
     );
   }
